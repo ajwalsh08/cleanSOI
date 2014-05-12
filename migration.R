@@ -15,7 +15,7 @@ migration <- function(county, state) {
                      County_Code_Origin == county_code &
                      State_Code_Origin == state_code)
   outflow_nocode <- outflow1[,5:9]
-  write.csv(inflow_nocode, file = "inflow.csv")
-  write.csv(outflow_nocode, file = "outflow.csv")
+  write.csv(inflow_nocode, file = "FILTEREDinflow.csv")
+  write.csv(outflow_nocode, file = "FILTEREDoutflow.csv")
 }
-migration("Flagler", "FL")
+print("Run migration() on your county-state pair of interest (e.g., migration("Jefferson", "AL")), then check the repo for your new files!")
