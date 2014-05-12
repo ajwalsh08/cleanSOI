@@ -29,7 +29,7 @@ migration <- function(county, state) {
   # Uses tapply to generate state summary tables
   inflow_states <- subset(inflow_nocode, State_Abbrv != state)
   summary <- with(inflow_states, tapply(Exmpt_Num, State_Abbrv, sum))
-  inflow_summary <- data.frame(value=summary)
+  inflow_summary <- data.frame(Exmpt_Num=summary)
   write.csv(inflow_summary, file = paste(county,state,"inflow by state.csv"))
   
   outflow_states <- subset(outflow_nocode, State_Abbrv != state)
