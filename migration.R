@@ -1,5 +1,5 @@
-inflow <- read.csv("~/Downloads/countyinflow1011.csv")
-outflow <- read.csv("~/Downloads/countyoutflow1011.csv")
+inflow <- read.csv("~/Desktop/cleanSOI/countyinflow1011.csv")
+outflow <- read.csv("~/Desktop/cleanSOI/countyoutflow1011.csv")
 codes <- inflow[,3:6]
 
 migration <- function(county, state) {
