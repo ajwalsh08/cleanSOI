@@ -18,4 +18,4 @@ migration <- function(county, state) {
   write.csv(inflow_nocode, file = "FILTEREDinflow.csv")
   write.csv(outflow_nocode, file = "FILTEREDoutflow.csv")
 }
-print("Run migration() on your county-state pair of interest (e.g., migration("Jefferson", "AL")), then check the repo for your new files!")
+print("Run migration on your county-state pair of interest, then check the repo for your new files!")
