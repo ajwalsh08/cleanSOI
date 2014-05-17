@@ -22,18 +22,21 @@ migration <- function(county, state) {
                      State_Code_Origin == state_code)
   outflow_nocode <- outflow1[,5:9]
   
-  # Outputs the data in two csv files
-  write.csv(inflow_nocode, file = paste(county,state,"inflow.csv"))
-  write.csv(outflow_nocode, file = paste(county,state,"outflow.csv"))
+  # Renames columns to facilitate merge
+  names(inflow_nocode) <- c("State", "County", "Returns_In", "Exemptions_In", "Income_In")
+  names(outflow_nocode) <- c("State", "County", "Returns_Out", "Exemptions_Out", "Income_Out")
   
-  # Uses tapply to generate state summary tables
-  inflow_states <- subset(inflow_nocode, State_Abbrv != state)
-  summary <- with(inflow_states, tapply(Exmpt_Num, State_Abbrv, sum))
-  inflow_summary <- data.frame(Exmpt_Num=summary)
-  write.csv(inflow_summary, file = paste(county,state,"inflow by state.csv"))
+  # Merges inflow and outflow
+  all_flow <- merge(inflow_nocode, outflow_nocode, all.x=TRUE, all.y=TRUE)
   
-  outflow_states <- subset(outflow_nocode, State_Abbrv != state)
-  summary <- with(outflow_states, tapply(Exmpt_Num, State_Abbrv, sum))
-  outflow_summary <- data.frame(value=summary)
-  write.csv(outflow_summary, file = paste(county,state,"outflow by state.csv"))
+  # Converts the NAs to zeroes
+  all_flow[is.na(all_flow)] <- 0
+  
+  #Creates 'net' variables
+  all_flow$Net_Returns_In <- all_flow$Returns_In - all_flow$Returns_Out
+  all_flow$Net_Exemptions_In <- all_flow$Exemptions_In - all_flow$Exemptions_Out
+  all_flow$Net_Income_In <- all_flow$Income_In - all_flow$Income_Out
+
+  # Writes the data to csv
+  write.csv(all_flow, file = paste(county,state,"Migration.csv"))  
 }
