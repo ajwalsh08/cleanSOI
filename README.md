@@ -7,7 +7,7 @@ The first step is downloading R, which is available <a href="http://www.r-projec
 
 Then <a href="https://github.com/ajwalsh08/cleanSOI/archive/master.zip" target="blank">download this repository to your computer.</a>
 
-Unzip the download, open the folder, and then open the file called "migration.R". This should open in a separate window in R.
+Unzip the download, then use R to open the file called "migration.R". This should open in a separate window in R.
 
 Once you've got the code open in R, select all of it, paste it into the R Console, and run it. You've now loaded the function into R! You're a computing genius!
 
